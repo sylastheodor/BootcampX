@@ -14,7 +14,7 @@ pool.query(`
 SELECT students.id as student_id, students.name as student_name, cohorts.name as cohort_name
 FROM students
 JOIN cohorts ON cohorts.id = cohort_id
-WHERE cohorts_name LIKE ${process.argv[2]}%
+WHERE cohorts.name LIKE '%${process.argv[2]}%'
 LIMIT ${process.argv[3] || 5} ; 
 `)
 .then(res => {

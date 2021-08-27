@@ -11,6 +11,5 @@
   "dependencies": {
     "pg": "^8.7.1"
   },
-  "devDependencies": {},
   "description": ""
 }
