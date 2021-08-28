@@ -7,16 +7,21 @@ const pool = new Pool({
   database: 'bootcampx'
 });
 
-pool.query(`
+const cohortName = process.argv[2] || 'JUL02'
+const question = `
 SELECT teachers.name as teacher, cohorts.name as cohort, count(assistance_requests) as total_assistances
 FROM teachers
 JOIN assistance_requests ON teacher_id = teachers.id
 JOIN students ON student_id = students.id
 JOIN cohorts ON cohort_id = cohorts.id
-WHERE cohorts.name = '${process.argv[2] || 'JUL02'}'
+WHERE cohorts.name = $1
 GROUP BY teachers.name, cohorts.name
 ORDER BY teacher;
-`)
+`
+
+
+
+pool.query(question, [cohortName])
 .then(res => {
   res.rows.forEach(user => {
     console.log(res.rows);
